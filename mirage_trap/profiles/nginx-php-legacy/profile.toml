@@ -1,0 +1,28 @@
+description = "Legacy customer portal: nginx 1.18 + PHP-FPM 7.4 on Ubuntu 20.04 (MySQL 8 on a separate host)"
+
+[identity]
+family = "nginx"
+server = "nginx/1.18.0 (Ubuntu)"
+powered_by = "PHP/7.4.3-4ubuntu2.19"
+keepalive_timeout = 75
+
+[session]
+cookie_name = "PHPSESSID"
+cookie_format = "php"
+
+# Service times in milliseconds (log-normal median / sigma).
+[latency.static]
+median = 2.5
+sigma = 0.35
+
+[latency.dynamic]
+median = 28
+sigma = 0.5
+
+[latency.db]
+median = 41
+sigma = 0.55
+
+[latency.error]
+median = 1.8
+sigma = 0.3

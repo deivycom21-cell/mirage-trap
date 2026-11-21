@@ -1,0 +1,72 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        python: ["3.11", "3.12", "3.13"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: pip
+      - run: python -m pip install -e ".[dev]"
+      - run: python -m pytest -q
+
+  scanners:
+    # The fake stack must fool real fingerprinting tools (PLAN.md section 3).
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install -e .
+      - run: sudo apt-get update && sudo apt-get install -y nmap whatweb
+      - name: start the trap
+        run: |
+          mkdir run && cd run
+          mirage-trap init --profile nginx-php-legacy --seed 1
+          sed -i 's/^providers = .*/providers = ["static"]/' config.toml
+          nohup mirage-trap run --host 127.0.0.1 --port 8080 --no-ssh > trap.log 2>&1 &
+          for i in $(seq 1 50); do curl -sf -o /dev/null http://127.0.0.1:8080/ && break; sleep 0.2; done
+      - name: doctor (live probes)
+        run: cd run && mirage-trap doctor --target 127.0.0.1:8080
+      - name: nmap identifies nginx, not Python
+        run: |
+          nmap -sV -p 8080 127.0.0.1 -oN nmap.txt
+          cat nmap.txt
+          grep -qi "nginx 1.18.0" nmap.txt
+          ! grep -qiE "uvicorn|python|starlette" nmap.txt
+      - name: whatweb identifies nginx + PHP
+        run: |
+          whatweb --color=never -a 3 http://127.0.0.1:8080/ | tee whatweb.txt
+          grep -q "nginx\[1.18.0\]" whatweb.txt
+          grep -q "PHP\[7.4" whatweb.txt
+      - if: always()
+        run: cat run/trap.log || true
+
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -t mirage-trap:ci .
+      - name: smoke
+        run: |
+          docker run -d --name mt -p 18080:8080 -e MIRAGE_LLM__PROVIDERS='["static"]' mirage-trap:ci
+          for i in $(seq 1 60); do curl -sf -o /dev/null http://127.0.0.1:18080/ && break; sleep 0.5; done
+          curl -si http://127.0.0.1:18080/nope | tee out.txt
+          grep -q "Server: nginx/1.18.0 (Ubuntu)" out.txt
+          docker logs mt

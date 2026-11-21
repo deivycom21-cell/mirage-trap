@@ -1,0 +1,44 @@
+# Trap + dashboard sharing one volume. The dashboard is published on the host's
+# loopback only; reach it from elsewhere with an SSH tunnel.
+#
+#   docker compose up -d
+#   docker compose exec trap cat /data/dashboard.token
+#   open http://127.0.0.1:9090/?token=<token>
+services:
+  trap:
+    build: .
+    image: mirage-trap:latest
+    restart: unless-stopped
+    environment:
+      MIRAGE_PROFILE: nginx-php-legacy          # nginx-php-legacy | node-express-api | ubuntu-admin-panel
+      # MIRAGE_WORLD__DOMAIN: portal.example.com
+      # MIRAGE_LLM__PROVIDERS: '["ollama","static"]'
+      # MIRAGE_LLM__OLLAMA__BASE_URL: http://ollama:11434
+    ports:
+      - "80:8080"
+      - "22:2222"        # move the host's real sshd off port 22 first
+      - "23:2323"
+    volumes:
+      - mirage-data:/data
+    read_only: true
+    tmpfs: [/tmp]
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+
+  dashboard:
+    image: mirage-trap:latest
+    depends_on: [trap]
+    restart: unless-stopped
+    # inside the container 127.0.0.1 would be unreachable; the port is published on the
+    # host's loopback only, and the Host header is still validated.
+    command: ["dashboard", "--host", "0.0.0.0", "--i-know-what-im-doing"]
+    ports:
+      - "127.0.0.1:9090:9090"
+    volumes:
+      - mirage-data:/data
+    read_only: true
+    cap_drop: [ALL]
+    security_opt: ["no-new-privileges:true"]
+
+volumes:
+  mirage-data:

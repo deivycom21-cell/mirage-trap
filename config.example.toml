@@ -1,0 +1,70 @@
+# mirage-trap configuration. Copy to config.toml (`mirage-trap init` does it for you).
+
+[server]
+profile = "nginx-php-legacy"      # nginx-php-legacy | node-express-api | ubuntu-admin-panel
+host = "0.0.0.0"
+port = 8080
+# TLS (standalone mode). Leave empty to disable. JA3/JA4 are captured in this mode.
+tls_port = 0
+tls_cert = ""
+tls_key = ""
+# Behind a real nginx (recommended in production). Real client IP and JA3 come from
+# the proxy via internal headers, which are stripped before anything else sees them.
+behind_proxy = false
+trusted_proxies = ["127.0.0.1"]
+client_ip_header = "X-Real-IP"
+ja3_header = "X-Mirage-JA3"
+ja4_header = "X-Mirage-JA4"
+
+[ssh]
+enabled = true
+host = "0.0.0.0"
+port = 2222
+# Extra credentials accepted besides the world's ones (user:password).
+# Leave empty to use the instance's deterministic weak-credential pick.
+accept = []
+
+[telnet]
+enabled = false
+host = "0.0.0.0"
+port = 2323
+
+[world]
+seed = 0                # 0 = random seed chosen on `world init`
+domain = ""             # the domain the fake company uses; ideally one you control
+
+[llm]
+# Tried in order; "static" never fails and must stay last.
+providers = ["ollama", "static"]
+timeout = 25
+max_calls_per_ip_per_day = 150
+max_calls_global_per_day = 3000
+
+[llm.ollama]
+base_url = "http://127.0.0.1:11434"
+model = "qwen2.5:7b-instruct"
+
+[llm.anthropic]
+model = "claude-haiku-5-5"
+api_key_env = "ANTHROPIC_API_KEY"
+
+[llm.openai]
+base_url = "https://api.openai.com/v1"
+model = "gpt-4o-mini"
+api_key_env = "OPENAI_API_KEY"
+
+[llm.claude_cli]
+binary = "claude"
+model = ""
+
+[dashboard]
+host = "127.0.0.1"
+port = 9090
+
+[storage]
+data_dir = "data"
+retention_days = 90
+max_body_bytes = 65536
+# Optional offline GeoIP databases (MaxMind GeoLite2 .mmdb files).
+geoip_city = ""
+geoip_asn = ""

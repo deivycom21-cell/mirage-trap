@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<style type="text/css">
+body {background-color: #fff; color: #222; font-family: sans-serif;}
+pre {margin: 0; font-family: monospace;}
+a:link {color: #009; text-decoration: none; background-color: #fff;}
+table {border-collapse: collapse; border: 0; width: 934px; box-shadow: 1px 2px 3px #ccc;}
+.center {text-align: center;}
+.center table {margin: 1em auto; text-align: left;}
+.center th {text-align: center !important;}
+td, th {border: 1px solid #666; font-size: 75%; vertical-align: baseline; padding: 4px 5px;}
+h1 {font-size: 150%;}
+h2 {font-size: 125%;}
+.p {text-align: left;}
+.e {background-color: #ccf; width: 300px; font-weight: bold;}
+.h {background-color: #99c; font-weight: bold;}
+.v {background-color: #ddd; max-width: 300px; overflow-x: auto; word-wrap: break-word;}
+hr {width: 934px; background-color: #ccc; border: 0; height: 1px;}
+</style>
+<title>PHP 7.4.3-4ubuntu2.19 - phpinfo()</title><meta name="ROBOTS" content="NOINDEX,NOFOLLOW,NOARCHIVE" /></head>
+<body><div class="center">
+<table>
+<tr class="h"><td>
+<h1 class="p">PHP Version 7.4.3-4ubuntu2.19</h1>
+</td></tr>
+</table>
+<table>
+<tr><td class="e">System </td><td class="v">Linux {{ world.host.hostname }} {{ world.os.kernel }} {{ world.os.kernel_build }} x86_64 </td></tr>
+<tr><td class="e">Build Date </td><td class="v">Jun 27 2023 15:49:59 </td></tr>
+<tr><td class="e">Server API </td><td class="v">{{ "FPM/FastCGI" if world.profile == "nginx-php-legacy" else "Apache 2.0 Handler" }} </td></tr>
+<tr><td class="e">Virtual Directory Support </td><td class="v">disabled </td></tr>
+<tr><td class="e">Configuration File (php.ini) Path </td><td class="v">/etc/php/7.4/{{ "fpm" if world.profile == "nginx-php-legacy" else "apache2" }} </td></tr>
+<tr><td class="e">Loaded Configuration File </td><td class="v">/etc/php/7.4/{{ "fpm" if world.profile == "nginx-php-legacy" else "apache2" }}/php.ini </td></tr>
+<tr><td class="e">Scan this dir for additional .ini files </td><td class="v">/etc/php/7.4/{{ "fpm" if world.profile == "nginx-php-legacy" else "apache2" }}/conf.d </td></tr>
+<tr><td class="e">PHP API </td><td class="v">20190902 </td></tr>
+<tr><td class="e">PHP Extension </td><td class="v">20190902 </td></tr>
+<tr><td class="e">Zend Extension </td><td class="v">320190902 </td></tr>
+<tr><td class="e">Debug Build </td><td class="v">no </td></tr>
+<tr><td class="e">Thread Safety </td><td class="v">disabled </td></tr>
+<tr><td class="e">Registered PHP Streams </td><td class="v">https, ftps, compress.zlib, php, file, glob, data, http, ftp, phar </td></tr>
+</table>
+<h2>Core</h2>
+<table>
+<tr class="h"><th>Directive</th><th>Local Value</th><th>Master Value</th></tr>
+<tr><td class="e">allow_url_fopen</td><td class="v">On</td><td class="v">On</td></tr>
+<tr><td class="e">allow_url_include</td><td class="v">Off</td><td class="v">Off</td></tr>
+<tr><td class="e">disable_functions</td><td class="v">pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_get_handler,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,pcntl_async_signals,pcntl_unshare,</td><td class="v">pcntl_alarm,pcntl_fork,pcntl_waitpid,pcntl_wait,pcntl_wifexited,pcntl_wifstopped,pcntl_wifsignaled,pcntl_wifcontinued,pcntl_wexitstatus,pcntl_wtermsig,pcntl_wstopsig,pcntl_signal,pcntl_signal_get_handler,pcntl_signal_dispatch,pcntl_get_last_error,pcntl_strerror,pcntl_sigprocmask,pcntl_sigwaitinfo,pcntl_sigtimedwait,pcntl_exec,pcntl_getpriority,pcntl_setpriority,pcntl_async_signals,pcntl_unshare,</td></tr>
+<tr><td class="e">display_errors</td><td class="v">Off</td><td class="v">Off</td></tr>
+<tr><td class="e">document_root</td><td class="v">{{ "/var/www/html" if world.profile == "nginx-php-legacy" else "/var/www/ops" }}</td><td class="v">no value</td></tr>
+<tr><td class="e">expose_php</td><td class="v">On</td><td class="v">On</td></tr>
+<tr><td class="e">file_uploads</td><td class="v">On</td><td class="v">On</td></tr>
+<tr><td class="e">max_execution_time</td><td class="v">30</td><td class="v">30</td></tr>
+<tr><td class="e">memory_limit</td><td class="v">128M</td><td class="v">128M</td></tr>
+<tr><td class="e">open_basedir</td><td class="v"><i>no value</i></td><td class="v"><i>no value</i></td></tr>
+<tr><td class="e">post_max_size</td><td class="v">8M</td><td class="v">8M</td></tr>
+<tr><td class="e">upload_max_filesize</td><td class="v">2M</td><td class="v">2M</td></tr>
+</table>
+<h2>Environment</h2>
+<table>
+<tr class="h"><th>Variable</th><th>Value</th></tr>
+<tr><td class="e">USER </td><td class="v">www-data </td></tr>
+<tr><td class="e">HOME </td><td class="v">/var/www </td></tr>
+</table>
+<h2>PHP Variables</h2>
+<table>
+<tr class="h"><th>Variable</th><th>Value</th></tr>
+<tr><td class="e">$_SERVER['SERVER_ADDR']</td><td class="v">{{ server_ip }}</td></tr>
+<tr><td class="e">$_SERVER['REMOTE_ADDR']</td><td class="v">{{ req.ip }}</td></tr>
+<tr><td class="e">$_SERVER['HTTP_HOST']</td><td class="v">{{ req.host }}</td></tr>
+<tr><td class="e">$_SERVER['HTTP_USER_AGENT']</td><td class="v">{{ req.headers.get("user-agent", "") }}</td></tr>
+<tr><td class="e">$_SERVER['SERVER_SOFTWARE']</td><td class="v">{{ "nginx/1.18.0" if world.profile == "nginx-php-legacy" else "Apache/2.4.41 (Ubuntu)" }}</td></tr>
+<tr><td class="e">$_SERVER['REQUEST_URI']</td><td class="v">{{ req.raw_path }}</td></tr>
+</table>
+<hr />
+<h1>PHP License</h1>
+<table><tr class="v"><td><p>This program is free software; you can redistribute it and/or modify it under the terms of the PHP License as published by the PHP Group and included in the distribution in the file:  LICENSE</p></td></tr></table>
+</div></body></html>

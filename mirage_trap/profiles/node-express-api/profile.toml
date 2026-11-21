@@ -1,0 +1,31 @@
+description = "SaaS REST + GraphQL API: Node 16 / Express 4, MySQL via mysql2"
+
+[identity]
+family = "express"
+server = ""
+powered_by = "Express"
+keepalive_timeout = 5
+
+[session]
+cookie_name = "connect.sid"
+cookie_format = "none"
+
+[latency.static]
+median = 2
+sigma = 0.3
+
+[latency.dynamic]
+median = 9
+sigma = 0.45
+
+[latency.json]
+median = 9
+sigma = 0.45
+
+[latency.db]
+median = 22
+sigma = 0.5
+
+[latency.error]
+median = 1.2
+sigma = 0.3

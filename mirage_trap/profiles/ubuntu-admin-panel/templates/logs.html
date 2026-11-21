@@ -1,0 +1,10 @@
+{% extends "_layout.html" %}
+{% block nav %}{% include "_nav.html" %}{% endblock %}
+{% block content %}
+<h2>Logs</h2>
+<form method="get" action="logs.php">
+<select name="file">{% for f in ["syslog", "auth.log", "apache2/access.log", "apache2/error.log", "db_backup.log"] %}<option{% if f == file %} selected{% endif %}>{{ f }}</option>{% endfor %}</select>
+<button>View</button>
+</form>
+<pre>{{ content }}</pre>
+{% endblock %}

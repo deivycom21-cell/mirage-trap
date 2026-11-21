@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html lang='en' dir='ltr'>
+<head>
+<meta charset="utf-8" />
+<meta name="referrer" content="no-referrer" />
+<meta name="robots" content="noindex,nofollow" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<link rel="icon" href="favicon.ico" type="image/x-icon" />
+<title>phpMyAdmin</title>
+<link rel="stylesheet" type="text/css" href="./themes/pmahomme/jquery/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="phpmyadmin.css.php?nocache=5422183451ltr&amp;server=1" />
+<style>body{font-family:sans-serif;background:#fff;font-size:82%}#login_form{width:23em;margin:0 auto;text-align:left}
+fieldset{border:1px solid #aaa;padding:1.5em;background:#eee;border-radius:4px}legend{font-weight:bold}
+.item{margin-bottom:.5em}label{display:inline-block;width:8em}h1{text-align:center;font-weight:normal;font-size:2.4em}
+.error{border:1px solid #c00;background:#fcc;color:#c00;padding:.5em;margin-bottom:1em}</style>
+</head>
+<body class="loginform">
+<div class="container">
+<a href="./url.php?url=https%3A%2F%2Fwww.phpmyadmin.net%2F" target="_blank" rel="noopener noreferrer" class="logo"></a>
+<h1>Welcome to <bdo dir="ltr" lang="en">phpMyAdmin</bdo></h1>
+<noscript><div class="error"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error" /> Javascript must be enabled past this point!</div></noscript>
+{% if error %}<div class="error"><img src="themes/dot.gif" title="" alt="" class="icon ic_s_error" /> {{ error }}</div>{% endif %}
+<br />
+<form method="post" id="login_form" action="index.php" name="login_form" class="disableAjax login hide js-show">
+<fieldset>
+<legend><input type="hidden" name="set_session" value="{{ "%026x" % range(10**12, 10**13)|random }}" />Log in<a href="./doc/html/index.html" target="documentation"><img src="themes/dot.gif" title="Documentation" alt="Documentation" class="icon ic_b_help" /></a></legend>
+<div class="item"><label for="input_username">Username:</label><input type="text" name="pma_username" id="input_username" value="" size="24" class="textfield"/></div>
+<div class="item"><label for="input_password">Password:</label><input type="password" name="pma_password" id="input_password" value="" size="24" class="textfield" /></div>
+<input type="hidden" name="server" value="1" />
+</fieldset>
+<fieldset class="tblFooters"><input value="Go" type="submit" id="input_go" />
+<input type="hidden" name="target" value="index.php" /><input type="hidden" name="lang" value="en" /></fieldset>
+</form>
+</div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{% extends "_layout.html" %}
+{% block nav %}{% include "_nav.html" %}{% endblock %}
+{% block content %}
+<h2>{{ host.hostname }}</h2>
+<table>
+<tr><th>Address</th><td>{{ host.ip }}</td><th>Uptime</th><td>{{ up_days }} days</td></tr>
+<tr><th>CPU</th><td>{{ host.cpus }} x {{ host.cpu_model }}</td><th>Load</th><td>{{ load|join(" ") }}</td></tr>
+<tr><th>Memory</th><td>{{ host.mem_mb }} MB</td><th>Disk /</th><td>{{ host.disk_used_pct }}% of {{ host.disk_gb }} GB</td></tr>
+</table>
+<h3>Services</h3>
+<table>{% for name, state in services %}<tr><td>{{ name }}</td><td>{{ state }}</td></tr>{% endfor %}</table>
+{% endblock %}

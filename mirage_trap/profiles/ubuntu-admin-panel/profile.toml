@@ -1,0 +1,27 @@
+description = "Internal ops console: Apache 2.4.41 + mod_php 7.4 on Ubuntu 20.04"
+
+[identity]
+family = "apache"
+server = "Apache/2.4.41 (Ubuntu)"
+powered_by = ""
+keepalive_timeout = 5
+
+[session]
+cookie_name = "PHPSESSID"
+cookie_format = "php"
+
+[latency.static]
+median = 3
+sigma = 0.35
+
+[latency.dynamic]
+median = 34
+sigma = 0.5
+
+[latency.db]
+median = 46
+sigma = 0.55
+
+[latency.error]
+median = 2.2
+sigma = 0.3

@@ -1,0 +1,10 @@
+{% extends "_layout.html" %}
+{% block content %}
+<h2>Our products</h2>
+<table>
+<tr><th>#</th><th>Product</th><th>Price</th></tr>
+{% for p in products %}
+<tr><td>{{ p[0] }}</td><td><a href="product.php?id={{ p[0] }}">{{ p[1] }}</a></td><td>${{ "%.2f"|format(p[2]|float) }}</td></tr>
+{% endfor %}
+</table>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends "_layout.html" %}
+{% block nav %}{% include "_nav.html" %}{% endblock %}
+{% block content %}
+<h2>Network diagnostics</h2>
+<form method="get" action="diagnostics.php">
+<select name="tool">{% for t in ["ping", "dig", "traceroute"] %}<option{% if t == tool %} selected{% endif %}>{{ t }}</option>{% endfor %}</select>
+<input name="host" value="{{ host }}" placeholder="hostname or IP"> <button>Run</button>
+</form>
+{% if output is not none %}<pre>{{ output }}</pre>{% endif %}
+{% endblock %}

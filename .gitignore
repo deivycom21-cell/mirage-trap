@@ -1,0 +1,30 @@
+# mirage-trap
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Secrets / local environment files (the trap's fake .env lives inside the world, not on disk)
+.env
+.env.*
+
+# Local SQLite databases (telemetry, tests)
+*.db
+*.db-wal
+*.db-shm
+*.sqlite
+*.sqlite3
+
+# Runtime data: telemetry, world, SSH host keys, dashboard token. Never commit.
+data/
+config.toml
+*.mmdb

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{% block title %}{{ company.name }} - Customer Portal{% endblock %}</title>
+<link rel="stylesheet" href="/assets/style.css">
+<style>
+.top{background:#1f3a5f;color:#fff;padding:12px 24px}.top a{color:#cfe0f5;margin-left:16px;text-decoration:none}
+.wrap{max-width:960px;margin:24px auto;background:#fff;padding:24px;border:1px solid #dde3ea}
+table{border-collapse:collapse;width:100%}td,th{border-bottom:1px solid #e5e9ee;padding:6px 8px;text-align:left;font-size:14px}
+.err{color:#b00020}.foot{font-size:12px;color:#888;text-align:center;margin:20px}
+input,button{padding:6px 8px}pre{background:#111;color:#ddd;padding:12px;overflow:auto}
+</style>
+</head>
+<body>
+<div class="top"><b>{{ company.name }}</b>
+{% block nav %}<a href="/index.php">Products</a>{% if user %}<a href="/admin/">Admin</a><a href="/logout.php">Logout</a>{% else %}<a href="/login.php">Staff login</a>{% endif %}{% endblock %}
+</div>
+<div class="wrap">
+{% block content %}{% endblock %}
+</div>
+<div class="foot">&copy; 2019-{{ year }} {{ company.name }}. All rights reserved.</div>
+</body>
+</html>

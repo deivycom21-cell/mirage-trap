@@ -1,0 +1,11 @@
+.venv/
+venv/
+data/
+config.toml
+**/__pycache__/
+*.py[cod]
+.pytest_cache/
+.git/
+dist/
+build/
+*.mmdb
